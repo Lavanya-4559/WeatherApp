@@ -4,7 +4,7 @@ const locationButton = document.querySelector(".location-btn");
 const currentWeatherDiv = document.querySelector(".current-weather");
 const weatherCardsDiv = document.querySelector(".weather-cards");
 
-const API_KEY = "WRITE YOUR API KEY"; // API key for OpenWeatherMap API
+const API_KEY = "WRITE YOUR API KEY"; 
 
 const createWeatherCard = (cityName, weatherItem, index) => {
     if(index === 0) { // HTML for the main weather card
@@ -18,7 +18,7 @@ const createWeatherCard = (cityName, weatherItem, index) => {
                     <img src="https://openweathermap.org/img/wn/${weatherItem.weather[0].icon}@4x.png" alt="weather-icon">
                     <h6>${weatherItem.weather[0].description}</h6>
                 </div>`;
-    } else { // HTML for the other five day forecast card
+    } else { 
         return `<li class="card">
                     <h3>(${weatherItem.dt_txt.split(" ")[0]})</h3>
                     <img src="https://openweathermap.org/img/wn/${weatherItem.weather[0].icon}@4x.png" alt="weather-icon">
@@ -42,12 +42,11 @@ const getWeatherDetails = (cityName, latitude, longitude) => {
             }
         });
 
-        // Clearing previous weather data
+        
         cityInput.value = "";
         currentWeatherDiv.innerHTML = "";
         weatherCardsDiv.innerHTML = "";
 
-        // Creating weather cards and adding them to the DOM
         fiveDaysForecast.forEach((weatherItem, index) => {
             const html = createWeatherCard(cityName, weatherItem, index);
             if (index === 0) {
@@ -79,7 +78,7 @@ const getCityCoordinates = () => {
 const getUserCoordinates = () => {
     navigator.geolocation.getCurrentPosition(
         position => {
-            const { latitude, longitude } = position.coords; // Get coordinates of user location
+            const { latitude, longitude } = position.coords; 
             // Get city name from coordinates using reverse geocoding API
             const API_URL = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`;
             fetch(API_URL).then(response => response.json()).then(data => {
